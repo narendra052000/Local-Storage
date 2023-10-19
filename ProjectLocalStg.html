@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>local storage exercise</title>
+    <link rel="icon"  href="./N-icon.jpg"> </link>  
+     <style>
+        #Displayip{
+            margin:80px 500px;
+            padding-right:80px;
+            padding-bottom:30px;
+            padding-left:20px;
+            color: rgb(247, 244, 244);
+            border:3px solid rgb(233, 176, 155);
+            border-radius:20px;
+            font-size: 25px;
+            background-image:url(N-icon.jpg);
+            background-size:100%;
+        
+        }
+    
+        input{
+            margin-left: 130px;
+            background-color: palegreen;
+            border-radius: 10px;
+            padding-left:15px;
+        }
+        input:hover{
+            box-shadow:1px 1px rgb(121, 66, 3);
+
+        }
+        button{
+            padding:5px;
+            font-size:20px;
+            background-color:rgb(199, 199, 198);
+            color:rgb(45, 27, 3);
+            box-shadow:1px;
+            border-radius:8px;
+        }
+        #delete{
+            margin-left:30px;
+        }
+        input:hover{
+            background-color: rgb(228, 244, 111);
+        transition:all ;
+    transform:scale(1.1)}
+        button:hover{
+            background-color: rgb(128, 239, 206);
+            color: rgb(51, 0, 255);
+        }
+        button:active{
+            background-color: rgb(240, 166, 181);
+        }
+        h1{
+            text-align: center;
+            color: rgb(115, 196, 243);
+            font-style: italic;
+            text-decoration: 2px wavy black;
+            /* border:2px dotted rgb(173, 116, 116); */
+            margin-top: 5px;;
+        }
+        body{
+            background-image:url(N-icon-2-1.jpg);
+            background-size:70px;
+
+        }
+        a{
+            text-decoration: none;
+            color:powderblue
+        }
+        #btn{ margin-left: 700px;
+         padding:10px;}
+    </style>
+</head>
+<body>
+  <div id="Displayip" targer="_blank">
+    <h1>Enter Details</h1>
+    Name<br><input type="text" id="nam1" ><br>
+    Place<br><input type="text" id="pla1" ><br>
+    Mobile No:<br><input type="number" id="mbn1" ><br>
+    Class<br><input type="number" id="cls1" ><br>
+    Roll no<br><input type="number" id="rln1" ><br><br>
+
+    <button onclick="tabl()">Add data </button>
+    <button onclick="tabl4()">Print Data</button>
+    <button id="delete" onclick="tab3()">Delete data</button>
+</div>
+<div id=""><button id="btn" onclick="home()" style="display:none;">Home</button></div>
+    <div id="Output"></div>
+
+    <!-- Script start -->
+    
+    <script>
+        var arraya=[];
+        var tabbb=document.getElementById('Output');
+        var btn2=document.getElementById('btn');
+        function tabl() {
+            var mbn=document.getElementById('mbn1').value;
+            var nam=document.getElementById('nam1').value;
+            var pla=document.getElementById('pla1').value;
+            var cls=document.getElementById('cls1').value;
+            var rln=document.getElementById('rln1').value;
+
+            var obj={name:nam,place:pla,mbno:mbn,class:cls,roll:rln,};
+            arraya.push(obj);
+
+            //local stg
+
+localStorage.setItem("Nar",JSON.stringify(arraya));
+        } 
+        function tabl4() {   
+                        //local stg
+
+    var arr=JSON.parse(localStorage.getItem("Nar"));
+
+    var tab=
+         "<table  border='3px solid white' style='background-color:lightgreen;color:blue;border-radius:10px;'>"
+            +"<tr>"+"<th>"+"Name"+"</th>"+"<th>"+"Place"+"</th>"+"<th>"+"Mobile number"+"</th>"+
+    "<th>"+"Class"+"</th>"+"<th>"+"Rollno"+"</th>"+"<tr>"
+for(a=0;a<arr.length;a++){
+    tab=tab+"<tr>"+"<td>"+arr[a].name+"</td>"+"<td>"+arr[a].place+"</td>"+"<td>"+arr[a].mbno+"</td>"+
+        "<td>"+arr[a].class+"</td>"+"<td>"+arr[a].roll+"</td>"+"</tr>"
+ }
+ tabbb.innerHTML=tab+"</table>";
+ 
+ tabbb.style.padding="5px";
+ tabbb.style.margin="150px 470px";
+ tabbb.style.textAlign="center";
+ tabbb.style.fontSize="25px";
+ 
+ btn2.style.display="block";
+ Displayip.style.display="none";
+ tabbb.style.display="block";
+
+
+        }
+    function tab3() {
+                    //local stg
+
+        localStorage.removeItem('Nar');
+    }
+    function home() {
+        Displayip.style.display="block";
+        tabbb.style.display="none";
+        btn2.style.display="none";
+        }
+    </script>
+</body>
+</html>
